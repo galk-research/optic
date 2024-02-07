@@ -1,0 +1,4 @@
+#!/bin/bash
+
+cd release
+cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=g++-8 -DCMAKE_C_COMPILER=gcc-8 ../src 

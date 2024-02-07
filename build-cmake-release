@@ -1,0 +1,4 @@
+cmake -Brelease -DCMAKE_BUILD_TYPE=Release src
+cd release
+make -j 10
+sudo cp

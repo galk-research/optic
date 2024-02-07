@@ -1,0 +1,1 @@
+sudo apt-get install cmake coinor-libcbc-dev coinor-libclp-dev coinor-libcoinutils-dev libgsl-dev libbz2-dev bison flex

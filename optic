@@ -1,0 +1,53 @@
+#!/usr/bin/perl -w
+use File::Spec;
+
+if ((scalar @ARGV) != 3) {
+	print "Usage: optic <domain> <problem> <solution>\n";
+	exit(1);
+}
+
+$dom = shift @ARGV;
+$prob = shift @ARGV;
+$soln = shift @ARGV;
+
+if (!(-e $dom)) {
+	print "Domain file $dom not found\n";
+	exit(1);
+}
+
+if (!(-e $prob)) {
+        print "Problem file $prob not found\n";
+        exit(1);
+}
+my ($volume, $directory, $file) = File::Spec->splitpath(File::Spec->rel2abs(__FILE__));
+
+open IN, "$directory/release/optic/optic-clp -I -n $dom $prob |";
+
+#$solnfile = 1;
+while (<IN>) {
+	if (m/; Plan found/) {
+		#print "\n\n - Opening plan file $soln.$solnfile\n";
+		print "\n\n - Opening plan file $soln\n";
+		print;
+		#open OUT, "> $soln.$solnfile";
+		open OUT, "> $soln";
+		print OUT;
+		while (<IN>) {
+			if (m/./) {
+				print;
+				print OUT;
+			} else {
+				print;
+				last;
+			}
+		}
+		close OUT;
+		#++$solnfile;
+	} else {
+		print;
+	}
+
+}
+
+close IN;
+exit $?;
